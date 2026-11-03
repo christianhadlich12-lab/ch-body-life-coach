@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CH Coach">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>CH Body & Life Coach</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d30;--panel2:#1d2940;--text:#f4f6fb;--muted:#aab5c8;--line:#2a3852;--accent:#b8f36b;--accentText:#17210a;--red:#ff8e8e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+header{padding:26px 18px 18px;background:linear-gradient(135deg,#18253c,#0b1020);border-bottom:1px solid var(--line)}
+.kicker{color:var(--accent);font-size:11px;letter-spacing:2px;font-weight:800}.brand{font-size:25px;font-weight:850;letter-spacing:-.7px;margin:5px 0}.sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:7px;overflow:auto;padding:12px 14px;position:sticky;top:0;background:#0b1020f2;z-index:5;border-bottom:1px solid var(--line)}
+nav button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 12px;border-radius:999px;font-weight:700}
+nav button.active{background:var(--accent);color:var(--accentText);border-color:var(--accent)}
+main{max-width:760px;margin:auto;padding:16px 14px 50px}.tab{display:none}.tab.active{display:block}
+h2{font-size:20px;margin:8px 0 12px}h3{font-size:16px;margin:0 0 8px}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{background:var(--panel2);border-radius:13px;padding:13px}.stat b{display:block;font-size:23px;margin-top:3px}.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
+.progress{height:8px;background:#2b3850;border-radius:99px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;background:var(--accent);width:0}
+.check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.check:last-child{border:0}.check input{width:19px;height:19px;accent-color:var(--accent);margin:1px 0 0}.check label{flex:1}
+button,.btn{cursor:pointer}.primary{border:0;border-radius:12px;padding:11px 14px;background:var(--accent);color:var(--accentText);font-weight:800}.secondary{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:9px 12px}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{font-size:11px;color:var(--accent);border:1px solid #52683a;border-radius:99px;padding:4px 8px}
+input[type=number],input[type=date],input[type=text],select{background:#0e1627;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;width:100%;font:inherit}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}.field label{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:9px 5px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:700}
+.daytabs{display:flex;gap:6px;overflow:auto;margin:10px 0}.daytabs button{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:8px 11px}.daytabs button.active{background:var(--accent);color:var(--accentText)}
+.meal{padding:11px 0;border-bottom:1px solid var(--line)}.meal:last-child{border:0}.meal b{display:block}.meal small{color:var(--muted)}
+.exercise{padding:10px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border:0}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+ <div class="kicker">PERSÖNLICHES COACHING · VERSION 1.0</div>
+ <div class="brand">CH BODY & LIFE</div>
+ <div class="sub">Lean first. Strong for life. Ein System, das auch an normalen Tagen funktioniert.</div>
+</header>
+<nav>
+ <button class="active" data-tab="today">Heute</button><button data-tab="training">Training</button><button data-tab="food">Ernährung</button><button data-tab="shop">Einkauf</button><button data-tab="progress">Fortschritt</button>
+</nav>
+<main>
+<section id="today" class="tab active">
+ <div class="row"><h2>Dein heutiger Check-in</h2><span class="pill" id="dateLabel"></span></div>
+ <div class="grid">
+  <div class="stat"><span>Kalorienziel</span><b>2.200</b><small class="muted">kcal / Tag</small></div>
+  <div class="stat"><span>Proteinziel</span><b>160 g</b><small class="muted">pro Tag</small></div>
+  <div class="stat"><span>Schritte</span><b>6.000</b><small class="muted">Startziel</small></div>
+  <div class="stat"><span>Schlaf</span><b>8 Std.</b><small class="muted">möglichst regelmäßig</small></div>
+ </div>
+ <div class="card">
+  <div class="row"><h3>Tägliche Basics</h3><b id="count">0/7</b></div><div class="progress"><i id="bar"></i></div>
+  <div id="checks"></div>
+  <div class="row"><button class="secondary" id="resetChecks">Tagesliste zurücksetzen</button><span class="small">Wird auf diesem Gerät gespeichert</span></div>
+ </div>
+ <div class="card">
+  <h3>Dein Tagesablauf – aktuell ohne Arbeit</h3>
+  <table><tr><td>07:30</td><td>Aufstehen, Tageslicht, Frühstück</td></tr><tr><td>08:30</td><td>Spaziergang / Erledigungen</td></tr><tr><td>09:30</td><td>Lesen, Lernen oder eigenes Projekt</td></tr><tr><td>12:00</td><td>Mittagessen</td></tr><tr><td>13:00</td><td>Training an Mo / Mi / Fr, sonst Aktivität</td></tr><tr><td>15:00</td><td>Freie Zeit, Haushalt, Bewerbungen</td></tr><tr><td>18:00</td><td>Abendessen</td></tr><tr><td>20:30</td><td>Lesen, entspannen, morgen vorbereiten</td></tr><tr><td>22:30</td><td>Runterfahren</td></tr><tr><td>23:00</td><td>Schlafen</td></tr></table>
+  <p class="small">Bei späterem Schichtbeginn oder frühem Arbeitsbeginn die Zeiten verschieben – Schlafdauer und Regelmäßigkeit behalten Vorrang.</p>
+ </div>
+ <div class="card">
+  <h3>Dein Minimum an schwierigen Tagen</h3>
+  <p class="muted">Eine proteinreiche Mahlzeit, 10 Minuten draußen, normale Schlafenszeit. Nicht aufgeben und nicht versuchen, am Folgetag alles doppelt nachzuholen.</p>
+ </div>
+</section>
+
+<section id="training" class="tab">
+ <h2>3-Tage-Ganzkörperplan</h2>
+ <p class="muted">Montag A · Mittwoch B · Freitag A. In der Folgewoche B/A/B. 60–75 Minuten inklusive Aufwärmen.</p>
+ <div class="daytabs"><button class="active" data-workout="A">Einheit A</button><button data-workout="B">Einheit B</button><button data-workout="rules">Regeln</button></div>
+ <div id="workoutContent"></div>
+ <div class="card"><h3>Trainingsprotokoll</h3><p class="small">Notiere pro Übung das Arbeitsgewicht und die Wiederholungen. Ziel: bei gleicher Technik schrittweise mehr Wiederholungen oder etwas mehr Gewicht.</p>
+ <div class="field"><label>Übung<input id="logExercise" type="text" placeholder="z. B. Schrägbank"></label><label>Gewicht (kg)<input id="logWeight" type="number" step="0.5" placeholder="30"></label></div>
+ <div class="field"><label>Wiederholungen<input id="logReps" type="number" placeholder="10"></label><label>Datum<input id="logDate" type="date"></label></div>
+ <button class="primary" id="saveLog">Eintrag speichern</button><div id="logList" class="small" style="margin-top:12px"></div></div>
+</section>
+
+<section id="food" class="tab">
+ <h2>7-Tage-Ernährungsplan</h2>
+ <p class="muted">Einfach, wiederholbar und mit günstigen Grundzutaten. Mengen bei Reis/Nudeln trocken, Fleisch roh. Kalorien und Protein sind Näherungswerte – Marken und Zubereitung verändern sie. Mit der ergänzten Brotscheibe und dem Erdnussmus liegt der Tag grob im Bereich von 2.100–2.250 kcal.</p>
+ <div class="daytabs" id="mealDays"></div>
+ <div class="card"><div class="row"><h3 id="mealTitle">Montag</h3><span class="pill">Ziel ca. 2.200 kcal</span></div><div id="mealContent"></div><p class="small">Wenn du an einem Tag mehr Hunger hast, Gemüse und Salat großzügig ergänzen. Öl, Nüsse, Saucen und Getränke mittracken.</p></div>
+ <div class="card"><h3>Tracking-Regeln</h3><ul class="muted"><li>Lebensmittel möglichst in Roh-/Trockengewicht wiegen.</li><li>Öl, Aufstriche, Saucen und Snacks ebenfalls eintragen.</li><li>Wasser, ungesüßter Tee und schwarzer Kaffee müssen nicht kompliziert getrackt werden.</li><li>Wiege dich morgens nach dem Toilettengang unter ähnlichen Bedingungen.</li></ul><p><b>App-Vorschlag:</b> YAZIO oder FDDB für Kalorien- und Makrotracking. Küchenwaage verwenden und eigene Standardmahlzeiten speichern.</p></div>
+</section>
+
+<section id="shop" class="tab">
+ <h2>Wocheneinkauf</h2><p class="muted">Mengen sind für eine Person und eine Woche kalkuliert. Kaufe Eigenmarken, Angebote und TK-Gemüse. Pantry-Grundlagen wie Öl/Gewürze reichen mehrere Wochen.</p>
+ <div class="card"><div class="row"><h3>Abhakliste</h3><span class="pill" id="shopCount">0 gekauft</span></div><div id="shoppingList"></div></div>
+ <div class="card"><h3>Budgetrahmen</h3><table><tr><td>Wocheneinkauf Ziel</td><td><b>ca. 55–60 €</b></td></tr><tr><td>Monatsziel</td><td><b>ca. 220–240 €</b></td></tr><tr><td>Reserve</td><td>10–30 € für Preisabweichungen</td></tr></table><p class="small">Das sind Planwerte, keine live geprüften Ladenpreise. Wenn dein Einkauf teurer wird: zuerst Angebote bei Quark, Eiern, TK-Gemüse und Fleisch vergleichen.</p></div>
+</section>
+
+<section id="progress" class="tab">
+ <h2>Fortschritt & Anpassung</h2><p class="muted">Nicht auf einzelne Tage reagieren. Entscheidend sind Trends über 2–3 Wochen.</p>
+ <div class="card"><h3>Check-in eintragen</h3>
+ <div class="field"><label>Gewicht (kg)<input id="weightInput" type="number" step="0.1" placeholder="86.0"></label><label>Bauchumfang (cm)<input id="waistInput" type="number" step="0.5" placeholder="95"></label></div>
+ <div class="field"><label>Datum<input id="progressDate" type="date"></label><label>Notiz<input id="progressNote" type="text" placeholder="z. B. guter Schlaf"></label></div>
+ <button class="primary" id="saveProgress">Check-in speichern</button><div id="progressList" style="margin-top:12px"></div></div>
+ <div class="card"><h3>Start-Zielwerte</h3><table><tr><td>Startgewicht</td><td>86 kg</td></tr><tr><td>Start-Bauchumfang</td><td>92–98 cm</td></tr><tr><td>Kalorien</td><td>ca. 2.200 kcal</td></tr><tr><td>Protein</td><td>ca. 160 g</td></tr><tr><td>Gewichtstrend</td><td>ca. 0,25–0,5 kg/Woche</td></tr></table><p class="small">Wenn der Wochenschnitt 2–3 Wochen nicht sinkt und das Tracking zuverlässig ist, Kalorien um etwa 100–150 kcal anpassen. Bei zu schnellem Verlust, starkem Hunger oder deutlichem Leistungsabfall etwas erhöhen.</p></div>
+</section>
+<footer>CH BODY & LIFE COACH · Deine Daten bleiben lokal auf diesem Gerät, solange Browserdaten nicht gelöscht werden.</footer>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const today=new Date().toISOString().slice(0,10);
+$('#dateLabel').textContent=new Date().toLocaleDateString('de-DE',{weekday:'long',day:'2-digit',month:'long'});
+['logDate','progressDate'].forEach(id=>$('#'+id).value=today);
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#'+b.dataset.tab).classList.add('active')});
+const basics=['Krafttraining oder aktive Erholung','Kalorien und Protein getrackt','Schrittziel / Spaziergang erreicht','Regelmäßige Mahlzeiten gegessen','20 Minuten gelesen oder gelernt','Eine sinnvolle Aufgabe erledigt','Schlafenszeit vorbereitet'];
+function renderChecks(){let a=get('checks_'+today,[]);$('#checks').innerHTML=basics.map((t,i)=>`<div class="check"><input type="checkbox" data-i="${i}" ${a.includes(i)?'checked':''}><label>${t}</label></div>`).join('');$('#checks').querySelectorAll('input').forEach(c=>c.onchange=()=>{let x=get('checks_'+today,[]);x=c.checked?[...x,+c.dataset.i]:x.filter(v=>v!==+c.dataset.i);set('checks_'+today,x);updateCount()});updateCount()}
+function updateCount(){let n=get('checks_'+today,[]).length;$('#count').textContent=n+'/7';$('#bar').style.width=(n/7*100)+'%'}
+renderChecks();$('#resetChecks').onclick=()=>{set('checks_'+today,[]);renderChecks()};
+const workouts={
+A:[['Schrägbankdrücken','3 × 6–10','Brust / obere Brust'],['Latzug','3 × 8–12','Lat / Rückenbreite'],['Beinpresse','3 × 8–12','Quadrizeps / Beine'],['Seitheben','3 × 12–20','Seitliche Schultern'],['Bizepscurls','2 × 10–15','Bizeps'],['Bauchmaschine','2 × 10–15','Bauch']],
+B:[['Brustpresse','3 × 8–12','Brust'],['Kabelrudern','3 × 8–12','Rückenmitte'],['Rumänisches Kreuzheben','3 × 8–10','Beinrückseite / Gesäß'],['Schulterdrücken','2 × 8–12','Schultern'],['Trizepsdrücken','2 × 10–15','Trizeps'],['Hanging Knee Raises','2 × 10–15','Bauch']]
+};
+function showWorkout(v){let el=$('#workoutContent');if(v==='rules'){el.innerHTML=`<div class="card"><h3>So trainierst du</h3><ul class="muted"><li>5–8 Minuten aufwärmen und vor der ersten schweren Übung leichte Aufwärmsätze.</li><li>Arbeitsgewichte so wählen, dass meistens 1–3 saubere Wiederholungen im Tank bleiben.</li><li>Pause: 2–3 Minuten bei Grundübungen, 60–120 Sekunden bei Isolationsübungen.</li><li>Wenn du in allen Sätzen das obere Ende des Wiederholungsbereichs sauber erreichst, Gewicht leicht erhöhen.</li><li>Technik vor Gewicht. Kein erzwungenes Muskelversagen.</li><li>Bei Schmerzen Übung stoppen und eine schmerzfreie Alternative wählen.</li></ul></div>`;return}
+el.innerHTML='<div class="card">'+workouts[v].map(x=>`<div class="exercise"><div class="row"><b>${x[0]}</b><span class="pill">${x[1]}</span></div><div class="small">${x[2]}</div></div>`).join('')+'</div>'}
+document.querySelectorAll('[data-workout]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-workout]').forEach(x=>x.classList.remove('active'));b.classList.add('active');showWorkout(b.dataset.workout)});showWorkout('A');
+let logs=get('logs',[]);function renderLogs(){$('#logList').innerHTML=logs.slice().reverse().map(x=>`<div class="check"><span>${x.date} · <b>${x.exercise}</b> — ${x.weight} kg × ${x.reps}</span></div>`).join('')||'Noch keine Einträge.'}
+$('#saveLog').onclick=()=>{if(!$('#logExercise').value||!$('#logWeight').value||!$('#logReps').value)return alert('Bitte Übung, Gewicht und Wiederholungen eintragen.');logs.push({date:$('#logDate').value,exercise:$('#logExercise').value,weight:$('#logWeight').value,reps:$('#logReps').value});set('logs',logs);renderLogs();$('#logExercise').value='';$('#logWeight').value='';$('#logReps').value=''};renderLogs();
+const days=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+const meals=[
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','200 g Hähnchen, 90 g Reis, 200 g TK-Gemüse, 5 g Öl'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','3 Eier, 300 g Kartoffeln, 150 g Kräuterquark, Gemüse']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','150 g mageres Hack, 75 g Reis, 200 g Tomaten/Gemüse'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','Linsentopf: 80 g rote Linsen (trocken), 2 Eier, Gemüse, 1 Scheibe Vollkornbrot']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','200 g Hähnchen, 90 g Reis, 200 g TK-Gemüse, 5 g Öl'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','3 Eier, 300 g Kartoffeln, 150 g Kräuterquark, Gemüse']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','1 Dose Thunfisch im eigenen Saft, 90 g Vollkornnudeln, Tomatensauce, Gemüse'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','150 g Hähnchen, 300 g Kartoffeln, Gemüse, 100 g Quark-Dip']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','200 g Hähnchen, 90 g Reis, 200 g TK-Gemüse, 5 g Öl'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','3 Eier, 300 g Kartoffeln, 150 g Kräuterquark, Gemüse']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','150 g mageres Hack, 90 g Vollkornnudeln, Tomatensauce, Gemüse'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','Omelett aus 3 Eiern, 250 g Kartoffeln, 150 g Quark, Salat']],
+[['Frühstück','60 g Haferflocken, 250 g Magerquark, 1 Banane, 15 g Erdnussmus und 1 Scheibe Vollkornbrot (ca. 60 g)'],['Mittag','200 g Hähnchen, 90 g Reis, 200 g TK-Gemüse, 5 g Öl'],['Snack','200 g Magerquark, 1 Apfel'],['Abend','Linsentopf: 80 g rote Linsen (trocken), 2 Eier, Gemüse, 1 Scheibe Vollkornbrot']]
+];
+function renderMeals(i){$('#mealTitle').textContent=days[i];$('#mealContent').innerHTML=meals[i].map(m=>`<div class="meal"><b>${m[0]}</b><small>${m[1]}</small></div>`).join('')}
+$('#mealDays').innerHTML=days.map((d,i)=>`<button data-day="${i}" class="${i===0?'active':''}">${d.slice(0,2)}</button>`).join('');$('#mealDays').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('#mealDays').querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMeals(+b.dataset.day)});renderMeals(0);
+const items=[['Magerquark','ca. 3,2 kg'],['Haferflocken','500 g'],['Bananen','7 Stück'],['Äpfel','7 Stück'],['Hähnchenbrust','ca. 1,0 kg'],['Mageres Hackfleisch','300–400 g'],['Eier','18 Stück'],['Reis','500 g'],['Kartoffeln','2,5 kg'],['TK-Gemüse','2 kg'],['Rote Linsen','250 g'],['Vollkornnudeln','250 g'],['Thunfisch im eigenen Saft','1 Dose'],['Passierte Tomaten','2 Packungen'],['Vollkornbrot','1 kleines Brot (ca. 500 g)'],['Erdnussmus','ca. 120 g'],['Zwiebeln / Salat','nach Bedarf'],['Naturgewürze / Öl','Vorrat prüfen']];
+let shop=get('shop',[]);function renderShop(){$('#shoppingList').innerHTML=items.map((x,i)=>`<div class="check"><input type="checkbox" data-shop="${i}" ${shop.includes(i)?'checked':''}><label><b>${x[0]}</b><div class="small">${x[1]}</div></label></div>`).join('');$('#shoppingList').querySelectorAll('input').forEach(c=>c.onchange=()=>{shop=c.checked?[...shop,+c.dataset.shop]:shop.filter(v=>v!==+c.dataset.shop);set('shop',shop);$('#shopCount').textContent=shop.length+' gekauft'});$('#shopCount').textContent=shop.length+' gekauft'}renderShop();
+let records=get('records',[]);function renderRecords(){$('#progressList').innerHTML=records.slice().reverse().map(r=>`<div class="check"><span><b>${r.date}</b> · ${r.weight} kg · Taille ${r.waist} cm ${r.note?'· '+r.note:''}</span></div>`).join('')||'<span class="small">Noch keine Check-ins.</span>'}
+$('#saveProgress').onclick=()=>{if(!$('#weightInput').value||!$('#waistInput').value)return alert('Bitte Gewicht und Bauchumfang eintragen.');records.push({date:$('#progressDate').value,weight:$('#weightInput').value,waist:$('#waistInput').value,note:$('#progressNote').value});set('records',records);renderRecords();$('#weightInput').value='';$('#waistInput').value='';$('#progressNote').value=''};renderRecords();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
